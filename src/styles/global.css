@@ -138,9 +138,15 @@ input {
   border-color: var(--border);
 }
 .btn-sm {
-  min-height: 36px;
+  min-height: 38px;
   padding: 0 var(--space-3);
   font-size: 14px;
+}
+/* Fingers need the full 44px; pointers can stay compact. */
+@media (pointer: coarse) {
+  .btn-sm {
+    min-height: 44px;
+  }
 }
 .btn-lg {
   min-height: 52px;

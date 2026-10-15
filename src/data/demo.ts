@@ -1,4 +1,5 @@
 import type { RawListeningData, SpotifyArtist, SpotifyPlayHistory, SpotifyTrack, TimeRange } from '../spotify/types'
+import type { ThemeId } from '../themes/types'
 import { int, pick, range, seededRng, shuffle, type Rng } from '../lib/rng'
 
 /**
@@ -7,6 +8,8 @@ import { int, pick, range, seededRng, shuffle, type Rng } from '../lib/rng'
  */
 export interface DemoPersona {
   id: string
+  /** The album version this listener's taste resolves to. */
+  theme: ThemeId
   label: string
   userName: string
   blurb: string
@@ -24,6 +27,7 @@ export interface DemoPersona {
 export const DEMO_PERSONAS: DemoPersona[] = [
   {
     id: 'raver',
+    theme: 'acid',
     label: 'Hyperpop raver',
     userName: 'Yuna',
     blurb: 'Hyperpop, K-pop and club edits at 2am.',
@@ -43,6 +47,7 @@ export const DEMO_PERSONAS: DemoPersona[] = [
   },
   {
     id: 'diarist',
+    theme: 'scrapbook',
     label: 'Indie folk diarist',
     userName: 'Ash',
     blurb: 'Acoustic indie and folk, mornings with coffee.',
@@ -56,12 +61,13 @@ export const DEMO_PERSONAS: DemoPersona[] = [
     nightBias: 0.08,
     years: [2009, 2026],
     durationSec: [180, 320],
-    discovery: 0.3,
-    repeat: 0.2,
+    discovery: 0.5,
+    repeat: 0.15,
     words: [['Paper', 'Morning', 'Harbor', 'Linen', 'Amber', 'Porch', 'Winter', 'Field'], ['Letters', 'Notes', 'Light', 'Maps', 'Weather', 'Rooms', 'Kites', 'Recordings']],
   },
   {
     id: 'head',
+    theme: 'newsprint',
     label: 'Hip-hop head',
     userName: 'Marcus',
     blurb: 'Boom bap, drill and alternative R&B.',
@@ -81,6 +87,7 @@ export const DEMO_PERSONAS: DemoPersona[] = [
   },
   {
     id: 'girlie',
+    theme: 'coquette',
     label: 'Pop girlie',
     userName: 'Lila',
     blurb: 'Chart pop, K-pop girl groups and dream pop.',
@@ -100,6 +107,7 @@ export const DEMO_PERSONAS: DemoPersona[] = [
   },
   {
     id: 'wall',
+    theme: 'concrete',
     label: 'Wall of sound',
     userName: 'Riley',
     blurb: 'Metal, post-punk and techno.',
@@ -110,15 +118,16 @@ export const DEMO_PERSONAS: DemoPersona[] = [
     ],
     popularity: [22, 58],
     explicit: 0.4,
-    nightBias: 0.3,
+    nightBias: 0.22,
     years: [2004, 2026],
     durationSec: [200, 420],
     discovery: 0.25,
-    repeat: 0.25,
+    repeat: 0.12,
     words: [['Signal', 'Static', 'Hard', 'Black', 'Loud', 'Dead', 'Iron', 'No'], ['Noise', 'Room', 'Copy', 'Sleep', 'Weather', 'Machine', 'Youth', 'Light']],
   },
   {
     id: 'nocturne',
+    theme: 'velvet',
     label: 'Late-night jazz',
     userName: 'Esme',
     blurb: 'Jazz, soul and film scores after dark.',
@@ -212,18 +221,20 @@ export function buildDemoData(persona: DemoPersona): RawListeningData {
     short_term: shuffle(seededRng(`${persona.id}:st`), tracks.slice(0, 20)).slice(0, 50),
   }
 
-  // Recently played: 50 plays across ~3 days with the persona's night bias and repeat rate.
+  // Recently played: 50 plays across ~3 days with the persona's night bias. Fresh plays walk
+  // a shuffled list without replacement so the repeat rate is exactly the persona's.
   const recent: SpotifyPlayHistory[] = []
   const now = Date.now()
   let cursor = now
-  const pool = tracksByRange.short_term.slice(0, 20)
+  const order = shuffle(rng, tracks)
+  let next = 0
   let last: SpotifyTrack | null = null
   for (let i = 0; i < 50; i++) {
     const night = rng() < persona.nightBias
     const hour = night ? int(rng, 0, 4) : int(rng, 8, 23)
     const d = new Date(cursor)
     d.setHours(hour, int(rng, 0, 59), 0, 0)
-    const track: SpotifyTrack = last && rng() < persona.repeat ? last : pick(rng, pool)
+    const track: SpotifyTrack = last && rng() < persona.repeat ? last : order[next++ % order.length]
     last = track
     recent.push({ track, played_at: d.toISOString() })
     cursor -= int(rng, 20, 110) * 60_000

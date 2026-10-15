@@ -4,6 +4,26 @@ Connect Spotify and get your listening year pressed as a physical-feeling album 
 
 Everything runs in the browser. No server, no uploads.
 
+![Landing page with a demo album floating behind the hero](docs/screenshots/landing.png)
+
+## Six album versions
+
+| Acid Y2K | Scrapbook | Newsprint |
+| --- | --- | --- |
+| ![Acid Y2K cover](docs/screenshots/cover-acid.png) | ![Scrapbook cover](docs/screenshots/cover-scrapbook.png) | ![Newsprint cover](docs/screenshots/cover-newsprint.png) |
+
+| Coquette | Concrete | Velvet |
+| --- | --- | --- |
+| ![Coquette cover](docs/screenshots/cover-coquette.png) | ![Concrete cover](docs/screenshots/cover-concrete.png) | ![Velvet cover](docs/screenshots/cover-velvet.png) |
+
+## Unboxing
+
+| Photobook | Photocards | CD player | Share card |
+| --- | --- | --- | --- |
+| ![Photobook spread](docs/screenshots/photobook.png) | ![Photocard pulls](docs/screenshots/photocards.png) | ![CD player add-in](docs/screenshots/cd-player.png) | ![Share modal](docs/screenshots/share.png) |
+
+(The demo listeners are fictional, so their "photos" are generated portraits. With a real account the album uses your artists' and albums' artwork.)
+
 ## How the album maps to your listening
 
 | Album component | Driven by |
@@ -52,6 +72,16 @@ BASE_PATH=/album-visualizer/ npm run build
 ```
 
 The redirect URI becomes `https://<user>.github.io/album-visualizer/`.
+
+## Smoke test
+
+`scripts/walk.mjs` drives a demo album through every unboxing step using the guide's button equivalents, screenshots each state and reports console errors:
+
+```bash
+npm i -D playwright && npx playwright install chromium   # once
+npm run dev                                             # in another terminal
+node scripts/walk.mjs                                   # PERSONA=girlie WIDTH=375 HEIGHT=812 SCHEME=light FULL=0 are optional
+```
 
 ## Accessibility and motion
 

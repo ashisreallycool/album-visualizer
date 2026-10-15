@@ -99,13 +99,13 @@ export function Landing() {
           <h2 id="versions-title">Six album versions</h2>
           <p className="muted">Like K-pop album versions, the packaging changes with your taste. Try each in the demo.</p>
           <ul className="version-list">
-            {THEME_LIST.map((t, i) => (
+            {THEME_LIST.map((t) => (
               <li key={t.id}>
                 <button
                   type="button"
                   className="version"
                   style={{ ['--swatch' as string]: t.colors.paper, ['--swatch-2' as string]: t.colors.accent }}
-                  onClick={() => void startDemo(DEMO_PERSONAS[i]?.id)}
+                  onClick={() => void startDemo(DEMO_PERSONAS.find((p) => p.theme === t.id)?.id)}
                 >
                   <span className="swatch" aria-hidden="true" />
                   <span className="version-name">{t.name}</span>

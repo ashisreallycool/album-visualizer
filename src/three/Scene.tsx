@@ -45,6 +45,9 @@ export function Scene({ assets, teaser = false }: { assets: AlbumAssets; teaser?
   const stage = assets.theme.colors.stage
   const floor = assets.theme.colors.floor
   const epoch = useApp((s) => s.epoch)
+  // Phones get lighter shadow work; the look barely changes at that size.
+  const small = typeof window !== 'undefined' && window.innerWidth < 768
+  const shadowSize = small ? 1024 : 2048
   return (
     <Canvas
       shadows
@@ -66,7 +69,7 @@ export function Scene({ assets, teaser = false }: { assets: AlbumAssets; teaser?
         castShadow
         position={[12, 30, 16]}
         intensity={2.4}
-        shadow-mapSize={[2048, 2048]}
+        shadow-mapSize={[shadowSize, shadowSize]}
         shadow-camera-left={-32}
         shadow-camera-right={32}
         shadow-camera-top={32}
@@ -87,7 +90,7 @@ export function Scene({ assets, teaser = false }: { assets: AlbumAssets; teaser?
       </Suspense>
       <Table color={floor} />
       <Album key={`${epoch}-${assets.profile.user.id}`} assets={assets} teaser={teaser} />
-      <ContactShadows position={[0, 0.02, 0]} opacity={0.5} scale={80} blur={2.4} far={14} resolution={512} />
+      <ContactShadows position={[0, 0.02, 0]} opacity={0.5} scale={80} blur={2.4} far={14} resolution={small ? 256 : 512} />
       <CameraRig teaser={teaser} />
     </Canvas>
   )

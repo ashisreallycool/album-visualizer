@@ -141,7 +141,7 @@ function computeStats(data: RawListeningData, artists: ArtistSummary[], tracks: 
   }
   const recentCount = recentTimes.length
   const nightShare = recentCount ? night / recentCount : 0
-  const peakHour = byHour.indexOf(Math.max(...byHour))
+  const peakHour = recentCount ? byHour.indexOf(Math.max(...byHour)) : 20
   const repeatRate = recentCount ? 1 - new Set(recentIds).size / recentCount : 0
 
   const years = tracks.map((t) => t.releaseYear).filter((y): y is number => Boolean(y))
@@ -182,7 +182,7 @@ function computeStats(data: RawListeningData, artists: ArtistSummary[], tracks: 
     mainstream: Math.round(mainstream),
     eclecticism,
     nightShare,
-    peakHour: peakHour < 0 ? 20 : peakHour,
+    peakHour,
     byHour,
     medianReleaseYear,
     decades,
@@ -202,12 +202,13 @@ function computeStats(data: RawListeningData, artists: ArtistSummary[], tracks: 
 
 function choosePersona(stats: ListeningStats): PersonaId {
   const year = new Date().getFullYear()
+  // Each score crosses 1.0 at a "clearly this" threshold; the curator is the quiet default.
   const scores: Record<PersonaId, number> = {
     nocturne: stats.nightShare / 0.3,
-    devotee: (stats.loyalArtist ? 0.6 : 0) + stats.repeatRate / 0.5,
+    devotee: (stats.loyalArtist ? 0.45 : 0) + stats.repeatRate / 0.7,
     explorer: stats.discoveryRate / 0.55,
     digger: (55 - stats.mainstream) / 20,
-    chartbreaker: (stats.mainstream - 68) / 12,
+    chartbreaker: (stats.mainstream - 62) / 12,
     timetraveler: (year - 12 - stats.medianReleaseYear) / 10,
     nomad: (stats.eclecticism - 55) / 20,
     marathoner: (stats.avgTrackSec - 280) / 90,

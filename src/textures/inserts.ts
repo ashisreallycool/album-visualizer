@@ -302,9 +302,10 @@ export function paintListenerCard(input: InsertInput): HTMLCanvasElement {
 
   const s = profile.stats
   const est = s.minutesSource === 'estimate'
+  const hasPace = s.minutesPerDay > 0
   const stats: Array<[string, string, string?]> = [
-    ['Listening pace', `${formatNumber(s.minutesPerDay)} min / day`, est ? 'from recent plays' : 'from your data export'],
-    ['Year at this pace', `${formatNumber(s.yearMinutes)} min`, est ? 'estimate' : `${formatNumber(s.history?.totalMinutes ?? 0)} min on record`],
+    ['Listening pace', hasPace ? `${formatNumber(s.minutesPerDay)} min / day` : '—', hasPace ? (est ? 'from recent plays' : 'from your data export') : 'no recent plays found'],
+    ['Year at this pace', hasPace ? `${formatNumber(s.yearMinutes)} min` : '—', est ? 'estimate' : `${formatNumber(s.history?.totalMinutes ?? 0)} min on record`],
     ['Peak hour', formatHour(s.peakHour), `${Math.round(s.nightShare * 100)}% after midnight`],
     ['Top genre', profile.families[0]?.label ?? '—', `${profile.stats.distinctGenres} genres total`],
     ['Artists in rotation', `${s.distinctArtists}`, s.followedArtists ? `${s.followedArtists} followed` : undefined],
