@@ -71,9 +71,10 @@ export function Disc({ assets }: { assets: AlbumAssets }) {
       _q.setFromEuler(_e)
       dampQuat(g.quaternion, _q, 6, dt, reduced)
     } else if (focus === 'disc') {
+      // Tilt the label side up toward the camera
       _v.set(12, 5, -5)
       dampVec(g.position, _v, 5, dt, reduced)
-      _e.set(-1.0, 0, 0)
+      _e.set(0.9, 0, 0)
       _q.setFromEuler(_e)
       dampQuat(g.quaternion, _q, 5, dt, reduced)
     } else {

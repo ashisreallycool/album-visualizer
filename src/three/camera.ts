@@ -11,7 +11,7 @@ export const CAMERA_PRESETS: Record<Focus, CameraPreset> = {
   inside: { pos: [0, 27, 13], target: [0, 1, 0] },
   book: { pos: [-10, 16, 42], target: [-10, 7.5, 5] },
   cards: { pos: [4, 13, 32], target: [4, 7, 2] },
-  disc: { pos: [12, 12, 13], target: [12, 4, -5] },
+  disc: { pos: [12, 13, 17], target: [12, 4, -5] },
   addin: { pos: [4, 14, 12], target: [3.2, 1.2, -2.6] },
   stickers: { pos: [2.6, 15, 14], target: [2.6, 0.6, 3.2] },
   card: { pos: [-2, 12, 9], target: [-2.2, 3, -2.5] },
