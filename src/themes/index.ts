@@ -1,0 +1,200 @@
+import type { Theme, ThemeId } from './types'
+
+export type { Theme, ThemeId } from './types'
+
+/**
+ * Six "album versions". Each maps to a family of genres and a visual direction
+ * drawn from the FigJam concept photos (scrapbook, acid Y2K, newsprint, coquette)
+ * plus two more from current packaging trends (brutalist concrete, art-deco velvet).
+ */
+export const THEMES: Record<ThemeId, Theme> = {
+  scrapbook: {
+    id: 'scrapbook',
+    name: 'Scrapbook',
+    versionSuffix: 'Passport ver.',
+    mood: 'Kraft paper, polaroids, washi tape and postage stamps — a travel journal of your year.',
+    inspiration: 'Vintage analog / anti-polish raw',
+    colors: {
+      paper: '#E9D9B5',
+      ink: '#2B1F14',
+      accent: '#C0392B',
+      accent2: '#2E6F6B',
+      muted: '#B89B6B',
+      foil: '#9A7B3F',
+      disc: '#C9A66B',
+      stage: '#EFE6D3',
+      floor: '#DCCFB3',
+    },
+    fonts: {
+      display: '"Caveat Variable", "Caveat", cursive',
+      accent: '"Special Elite", "Courier New", monospace',
+      body: '"Instrument Serif", Georgia, serif',
+      displayWeight: 700,
+    },
+    titleBank: ['notes to self', 'field recordings', 'postcards home', 'i do me', 'the long way round', 'kept pages', 'somewhere in between'],
+    stickerShape: 'label',
+    frame: 'polaroid',
+    titleStyle: 'marker',
+    decor: 'tape',
+  },
+  acid: {
+    id: 'acid',
+    name: 'Acid Y2K',
+    versionSuffix: 'Lemonade ver.',
+    mood: 'Electric blue, lime, chrome and cut-out stickers — a collage that will not sit still.',
+    inspiration: 'Y2K aesthetic / Gen Z chaos maximalism',
+    colors: {
+      paper: '#1033FF',
+      ink: '#0A0A1A',
+      accent: '#D4FF2E',
+      accent2: '#FF4FD8',
+      muted: '#6FE7FF',
+      foil: '#D8DEE9',
+      disc: '#D4FF2E',
+      stage: '#0E2BE0',
+      floor: '#0A1FA8',
+    },
+    fonts: {
+      display: '"Unbounded Variable", "Unbounded", sans-serif',
+      accent: '"Rubik Glitch", "Unbounded Variable", sans-serif',
+      body: '"Space Mono", monospace',
+      displayWeight: 900,
+    },
+    titleBank: ['OVERDRIVE', 'SUPERNOVA', 'GLITCHLOVE', 'LEMONADE', 'HYPERLINK', 'SUGAR RUSH', 'DRAMA MODE'],
+    stickerShape: 'diecut',
+    frame: 'cutout',
+    titleStyle: 'warp',
+    decor: 'chaos',
+  },
+  newsprint: {
+    id: 'newsprint',
+    name: 'Newsprint',
+    versionSuffix: 'Drip Bag ver.',
+    mood: 'Black ink on newsprint, coffee rings, a crossword and one red stamp.',
+    inspiration: 'Editorial grid / magazine',
+    colors: {
+      paper: '#EFEBE1',
+      ink: '#121212',
+      accent: '#D62828',
+      accent2: '#6B4F2A',
+      muted: '#A8A39A',
+      foil: '#3B3B3B',
+      disc: '#F2EEE6',
+      stage: '#E3DED3',
+      floor: '#CFC9BC',
+    },
+    fonts: {
+      display: '"Anton", Impact, sans-serif',
+      accent: '"Courier Prime", "Courier New", monospace',
+      body: '"Instrument Serif", Georgia, serif',
+      displayWeight: 400,
+    },
+    titleBank: ["I'M INTO", 'LATE EDITION', 'DAILY DOSE', 'MORNING PAPER', 'ON THE RECORD', 'FRONT PAGE', 'BLACK COFFEE'],
+    stickerShape: 'badge',
+    frame: 'halftone',
+    titleStyle: 'masthead',
+    decor: 'press',
+  },
+  coquette: {
+    id: 'coquette',
+    name: 'Coquette',
+    versionSuffix: 'Heart Case ver.',
+    mood: 'Frosted lilac, chrome hearts, pink gems and script — soft, shiny and a little precious.',
+    inspiration: 'Y2K pastel / glass + chrome',
+    colors: {
+      paper: '#E8E2F4',
+      ink: '#3A2E52',
+      accent: '#F7A8D8',
+      accent2: '#C9B8F5',
+      muted: '#B9B0CC',
+      foil: '#C8CCD8',
+      disc: '#F3E9F9',
+      stage: '#EDE8F7',
+      floor: '#DCD5EC',
+    },
+    fonts: {
+      display: '"Parisienne", cursive',
+      accent: '"Playfair Display Variable", "Playfair Display", serif',
+      body: '"Instrument Sans Variable", "Instrument Sans", sans-serif',
+      displayWeight: 400,
+    },
+    titleBank: ['Heart Shaped', 'Revive', 'Crush Season', 'Soft Launch', 'Lovesick Hours', 'Sweet Nothing', 'Glass Heart'],
+    stickerShape: 'heart',
+    frame: 'heart',
+    titleStyle: 'script',
+    decor: 'sparkle',
+  },
+  concrete: {
+    id: 'concrete',
+    name: 'Concrete',
+    versionSuffix: 'Signal ver.',
+    mood: 'Raw concrete, oversized black type and one safety-orange signal — brutalist and loud.',
+    inspiration: 'Brutalism / Swiss grid',
+    colors: {
+      paper: '#C9C7C2',
+      ink: '#0D0D0D',
+      accent: '#FF4D00',
+      accent2: '#2B2B2B',
+      muted: '#8D8B86',
+      foil: '#A6A6A6',
+      disc: '#1A1A1A',
+      stage: '#B9B6B0',
+      floor: '#A5A29C',
+    },
+    fonts: {
+      display: '"Archivo Variable", "Archivo", sans-serif',
+      accent: '"JetBrains Mono Variable", "JetBrains Mono", monospace',
+      body: '"Archivo Variable", "Archivo", sans-serif',
+      displayWeight: 900,
+    },
+    titleBank: ['SIGNAL/NOISE', 'CONCRETE', 'BLACKOUT', 'LOUD ROOM', 'NO SLEEP', 'STATIC YOUTH', 'HARD COPY'],
+    stickerShape: 'tag',
+    frame: 'duotone',
+    titleStyle: 'block',
+    decor: 'grid',
+  },
+  velvet: {
+    id: 'velvet',
+    name: 'Velvet',
+    versionSuffix: 'After Hours ver.',
+    mood: 'Burgundy velvet, gold foil serif and art-deco sunbursts — the late set at a small club.',
+    inspiration: 'Art deco / lounge',
+    colors: {
+      paper: '#3B0F1E',
+      ink: '#F4E4C8',
+      accent: '#D4A64A',
+      accent2: '#7A1F3D',
+      muted: '#8B5A6A',
+      foil: '#E8C372',
+      disc: '#2A0A14',
+      stage: '#24080F',
+      floor: '#1A0509',
+    },
+    fonts: {
+      display: '"Playfair Display Variable", "Playfair Display", serif',
+      accent: '"Syne Variable", "Syne", sans-serif',
+      body: '"Instrument Serif", Georgia, serif',
+      displayWeight: 900,
+    },
+    titleBank: ['After Hours', 'Velvet Hour', 'Blue Note', 'Last Call', 'Slow Burn', 'Nocturne', 'Low Light'],
+    stickerShape: 'circle',
+    frame: 'vignette',
+    titleStyle: 'foil',
+    decor: 'deco',
+  },
+}
+
+export const THEME_LIST: Theme[] = Object.values(THEMES)
+
+/** Loads the fonts a theme paints with, so canvas text renders in the right face. */
+export async function ensureThemeFonts(theme: Theme): Promise<void> {
+  if (!('fonts' in document)) return
+  const specs = [
+    `${theme.fonts.displayWeight} 48px ${theme.fonts.display}`,
+    `400 24px ${theme.fonts.accent}`,
+    `400 24px ${theme.fonts.body}`,
+    '700 24px "Space Grotesk Variable"',
+    '400 24px "Space Mono"',
+  ]
+  await Promise.all(specs.map((s) => document.fonts.load(s).catch(() => [])))
+}
